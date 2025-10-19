@@ -33,7 +33,7 @@ const userRegisterValidator = () => {
       .trim()
       .notEmpty()
       .withMessage("Password is required")
-      .isLength({ max: 8 })
+      .isLength({ min: 8 })
       .withMessage("Password must be at most 8 characters long"),
     body("fullname").trim().notEmpty().withMessage("Fulname is required"),
   ];
@@ -47,7 +47,7 @@ const userUpdateAccountDetailsValidator = () => {
       .withMessage("Email is required")
       .isEmail()
       .withMessage("Email is invalid"),
-    body("fullname").trim().notEmpty().withMessage("Fulname is required"),
+    body("fullname").trim().notEmpty().withMessage("Fullname is required"),
   ];
 }
 
@@ -57,7 +57,7 @@ const userUpdatePassword = () => {
       .trim()
       .notEmpty()
       .withMessage("Password is required")
-      .isLength({ max: 8 })
+      .isLength({ min: 8 })
       .withMessage("Password must be at most 8 characters long"),
     body("oldPassword")
       .trim()
