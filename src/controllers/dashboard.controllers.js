@@ -1,15 +1,17 @@
-import { Router } from "express";
-import {
-  getChannelStats,
-  getChannelVideos,
-} from "../controllers/dashboard.controller.js";
-import { verifyJWT } from "../middlewares/auth.middleware.js";
+import mongoose from "mongoose";
+import { Video } from "../models/video.models.js";
+import { Subscription } from "../models/subscription.models.js";
+import { Like } from "../models/like.models.js";
+import { ApiError } from "../utils/ApiError.js";
+import { ApiResponse } from "../utils/ApiResponse.js";
+import { asyncHandler } from "../utils/asyncHandler.js";
 
-const router = Router();
+const getChannelStats = asyncHandler(async (req, res) => {
+  // TODO: Get the channel stats like total video views, total subscribers, total videos, total likes etc.
+});
 
-router.use(verifyJWT); // Apply verifyJWT middleware to all routes in this file
+const getChannelVideos = asyncHandler(async (req, res) => {
+  // TODO: Get all the videos uploaded by the channel
+});
 
-router.route("/stats").get(getChannelStats);
-router.route("/videos").get(getChannelVideos);
-
-export default router;
+export { getChannelStats, getChannelVideos };

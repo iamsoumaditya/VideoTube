@@ -1,30 +1,51 @@
-import { Router } from "express";
-import {
-  addVideoToPlaylist,
+import mongoose, { isValidObjectId } from "mongoose";
+import { Playlist } from "../models/playlist.models.js";
+import { ApiError } from "../utils/ApiError.js";
+import { ApiResponse } from "../utils/ApiResponse.js";
+import { asyncHandler } from "../utils/asyncHandler.js";
+
+const createPlaylist = asyncHandler(async (req, res) => {
+  const { name, description } = req.body;
+
+  //TODO: create playlist
+});
+
+const getUserPlaylists = asyncHandler(async (req, res) => {
+  const { userId } = req.params;
+  //TODO: get user playlists
+});
+
+const getPlaylistById = asyncHandler(async (req, res) => {
+  const { playlistId } = req.params;
+  //TODO: get playlist by id
+});
+
+const addVideoToPlaylist = asyncHandler(async (req, res) => {
+  const { playlistId, videoId } = req.params;
+});
+
+const removeVideoFromPlaylist = asyncHandler(async (req, res) => {
+  const { playlistId, videoId } = req.params;
+  // TODO: remove video from playlist
+});
+
+const deletePlaylist = asyncHandler(async (req, res) => {
+  const { playlistId } = req.params;
+  // TODO: delete playlist
+});
+
+const updatePlaylist = asyncHandler(async (req, res) => {
+  const { playlistId } = req.params;
+  const { name, description } = req.body;
+  //TODO: update playlist
+});
+
+export {
   createPlaylist,
-  deletePlaylist,
-  getPlaylistById,
   getUserPlaylists,
+  getPlaylistById,
+  addVideoToPlaylist,
   removeVideoFromPlaylist,
+  deletePlaylist,
   updatePlaylist,
-} from "../controllers/playlist.controller.js";
-import { verifyJWT } from "../middlewares/auth.middleware.js";
-
-const router = Router();
-
-router.use(verifyJWT); // Apply verifyJWT middleware to all routes in this file
-
-router.route("/").post(createPlaylist);
-
-router
-  .route("/:playlistId")
-  .get(getPlaylistById)
-  .patch(updatePlaylist)
-  .delete(deletePlaylist);
-
-router.route("/add/:videoId/:playlistId").patch(addVideoToPlaylist);
-router.route("/remove/:videoId/:playlistId").patch(removeVideoFromPlaylist);
-
-router.route("/user/:userId").get(getUserPlaylists);
-
-export default router;
+};

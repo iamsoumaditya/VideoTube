@@ -18,8 +18,9 @@ const uploadOnCloudinary = async (localFilePath) => {
         const response = await cloudinary.uploader.upload(
             localFilePath,
             {
-                resource_type:"auto"
-            }
+                resource_type: "auto",
+                folder: "VideoTube/users"
+            },
         )
         console.log("File uploaded on cloudinary. File src: " + response.url);
         fs.unlinkSync(localFilePath);
@@ -40,4 +41,4 @@ const deleteFromCloudinary = async (publicId) => {
     }
 }
 
-export {uploadOnCloudinary,deleteFromCloudinary}
+export { uploadOnCloudinary, deleteFromCloudinary }

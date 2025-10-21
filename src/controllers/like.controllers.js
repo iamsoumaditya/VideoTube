@@ -1,18 +1,26 @@
-import { Router } from "express";
-import {
-  getLikedVideos,
-  toggleCommentLike,
-  toggleVideoLike,
-  toggleTweetLike,
-} from "../controllers/like.controller.js";
-import { verifyJWT } from "../middlewares/auth.middleware.js";
+import mongoose, { isValidObjectId } from "mongoose";
+import { Like } from "../models/like.models.js";
+import { ApiError } from "../utils/ApiError.js";
+import { ApiResponse } from "../utils/ApiResponse.js";
+import { asyncHandler } from "../utils/asyncHandler.js";
 
-const router = Router();
-router.use(verifyJWT); // Apply verifyJWT middleware to all routes in this file
+const toggleVideoLike = asyncHandler(async (req, res) => {
+  const { videoId } = req.params;
+  //TODO: toggle like on video
+});
 
-router.route("/toggle/v/:videoId").post(toggleVideoLike);
-router.route("/toggle/c/:commentId").post(toggleCommentLike);
-router.route("/toggle/t/:tweetId").post(toggleTweetLike);
-router.route("/videos").get(getLikedVideos);
+const toggleCommentLike = asyncHandler(async (req, res) => {
+  const { commentId } = req.params;
+  //TODO: toggle like on comment
+});
 
-export default router;
+const toggleTweetLike = asyncHandler(async (req, res) => {
+  const { tweetId } = req.params;
+  //TODO: toggle like on tweet
+});
+
+const getLikedVideos = asyncHandler(async (req, res) => {
+  //TODO: get all liked videos
+});
+
+export { toggleCommentLike, toggleTweetLike, toggleVideoLike, getLikedVideos };
