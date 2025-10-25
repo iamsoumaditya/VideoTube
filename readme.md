@@ -95,7 +95,10 @@ VideoTube/
 ├── .env  
 ├── .env.sample # Sample environment variables  
 ├── .gitignore  
-└── package.json    
+├── package-lock.json    
+├── package.json    
+├── readme.md  
+└── VideoTube.postman_collection.json    
 
 ---
 
