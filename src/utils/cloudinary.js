@@ -1,6 +1,7 @@
 import { v2 as cloudinary } from "cloudinary";
 import fs from "fs"
 import dotenv from "dotenv";
+import { ApiError } from "./ApiError.js";
 
 dotenv.config();
 
@@ -11,33 +12,29 @@ cloudinary.config({
   api_secret: process.env.CLOUDINARY_API_SECRET,
 });
 
+const uploadOnCloudinary = async (
+  localFilePath,
+  options = { resource_type: "auto", folder: "VideoTube/users" }
+) => {
+  try {
+    if (!localFilePath) return null;
+    const response = await cloudinary.uploader.upload(localFilePath, options);
+    console.log("File uploaded on cloudinary. File src: " + response.url);
+    fs.unlinkSync(localFilePath);
+    return response;
+  } catch (error) {
+    console.log("Error:", error);
+    fs.unlinkSync(localFilePath);
+    return null;
+  }
+};
 
-const uploadOnCloudinary = async (localFilePath) => {
+const deleteFromCloudinary = async (publicId,options = { resource_type: "image" }) => {
     try {
-        if (!localFilePath) return null
-        const response = await cloudinary.uploader.upload(
-            localFilePath,
-            {
-                resource_type: "auto",
-                folder: "VideoTube/users"
-            },
-        )
-        console.log("File uploaded on cloudinary. File src: " + response.url);
-        fs.unlinkSync(localFilePath);
-        return response
+      const result = cloudinary.uploader.destroy(publicId, options);
     } catch (error) {
-        console.log("Error:",error);
-        fs.unlinkSync(localFilePath)
-        return null
-    }
-}
-
-const deleteFromCloudinary = async (publicId) => {
-    try {
-       const result =  cloudinary.uploader.destroy(publicId)
-    } catch (error) {
-        console.log("Error deleting from clodinary",error);
-        return null
+      console.log("Error deleting from clodinary", error);
+      throw new ApiError(400,"Unable to delete the video")
     }
 }
 

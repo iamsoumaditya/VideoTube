@@ -391,7 +391,7 @@ const getUserChannelProfile = asyncHandler(async (req, res) => {
         channelsSubscribedToCount: 1,
         isSubscribed: 1,
         coverImage: 1,
-        emal: 1,
+        email: 1,
       },
     },
   ]);
@@ -402,7 +402,7 @@ const getUserChannelProfile = asyncHandler(async (req, res) => {
 
   return res
     .status(200)
-    .json(200, channel[0], "Channel profile fetched successfully");
+    .json(new ApiResponse(200, channel[0], "Channel profile fetched successfully"));
 });
 
 const getWatchHistory = asyncHandler(async (req, res) => {
@@ -434,6 +434,17 @@ const getWatchHistory = asyncHandler(async (req, res) => {
                   },
                 },
               ],
+            },
+          },
+          {
+            $project: {
+              videoFile: 1,
+              thumbnail: 1,
+              title: 1,
+              description: 1,
+              duration: 1,
+              views: 1,
+              owner:1
             },
           },
           {

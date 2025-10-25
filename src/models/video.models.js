@@ -7,7 +7,15 @@ const videoSchema = new Schema(
       type: String,
       required: true,
     },
+    videoPublic_id: {
+      type: String,
+      required: true,
+    },
     thumbnail: {
+      type: String,
+      required: true,
+    },
+    thumbnailPublic_id: {
       type: String,
       required: true,
     },
@@ -25,7 +33,11 @@ const videoSchema = new Schema(
     },
     views: {
       type: Number,
-      dafault: 0,
+      default: 0,
+    },
+    likes: {
+      type: Number,
+      default: 0,
     },
     isPublished: {
       type: Boolean,
