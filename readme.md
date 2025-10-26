@@ -112,13 +112,13 @@ VideoTube/
 
     npm install
 
-3. Set up environment
+3. Set up environment  
     copy all enviroment variables from .env.sample and add your own credentials
 
 4. Run Command
    
-   npm run dev #development
-   npm run start #production
+   npm run dev  #development  
+   npm run start  #production
 
 ---
 
