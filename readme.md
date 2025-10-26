@@ -65,7 +65,7 @@ VideoTube/
 │ │  
 │ ├── routes/ # API routes  
 │ │ ├── comment.routes.js  
-│ │ ├── dashboard.routes.js 
+│ │ ├── dashboard.routes.js  
 │ │ ├── healthcheck.routes.js  
 │ │ ├── like.routes.js  
 │ │ ├── playlist.routes.js  
